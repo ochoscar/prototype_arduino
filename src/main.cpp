@@ -2,8 +2,9 @@
 
 int LEDpin = 13; 
 int delayT = 1000; 
+char a;
 
-void setup() { 
+/*void setup() { 
     // put your setup code here, to run once: 
     pinMode(LEDpin, OUTPUT); 
 } 
@@ -14,6 +15,26 @@ void loop() {
     delay(delayT); 
     digitalWrite(LEDpin, LOW); 
     delay(delayT); 
+}*/
+
+
+void setup() {
+  Serial.begin(9600);
 }
 
 
+void loop() {
+    String str = "";
+    Serial.print("Message: ");
+    while (a != '\n') {
+        if(Serial.available()) {
+            a = Serial.read();
+            str += a;
+            Serial.print(a);
+        }
+    }
+    Serial.print("Complete Message: " + str);
+    Serial.println("Hello World");
+    delay(delayT); 
+    a = ' ';
+}
